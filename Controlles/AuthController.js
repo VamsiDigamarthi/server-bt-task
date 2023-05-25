@@ -78,3 +78,50 @@ export const deleteUser = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+// project id added to team of employee
+
+export const projectIdAddedToEmployee = async (req, res) => {
+  const { id, projectId } = req.body;
+  // console.log(id);
+  // console.log(projectId);
+  try {
+    const userDetails = await UserModel.findById(id);
+    // console.log(userDetails);
+
+    if (userDetails.project_id.includes(projectId)) {
+      await userDetails.updateOne({ $pull: { project_id: projectId } });
+      res.status(200).json("project_id remove successfully");
+    } else {
+      await userDetails.updateOne({ $push: { project_id: projectId } });
+      res.status(200).json("project_id added successfully");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// project id fetch one employee
+
+export const fetchOneEmployee = async (req, res) => {
+  const id = req.params.id;
+  //console.log(id);
+  try {
+    const userDetails = await UserModel.findById(id);
+    res.status(200).json(userDetails);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
+// project click corresponding assign user fetch data
+
+export const fetchProjectClickCorrespondingUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const userDetails = await UserModel.find({ project_id: { $in: [id] } });
+    res.status(200).json(userDetails);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};

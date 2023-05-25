@@ -6,6 +6,10 @@ const TaskSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    project_id: {
+      type: String,
+      require: true,
+    },
     description: {
       type: String,
     },
@@ -22,6 +26,14 @@ const TaskSchema = mongoose.Schema(
       require: true,
     },
     date: {
+      type: String,
+      require: true,
+    },
+    createdate: {
+      type: String,
+      require: true,
+    },
+    project_id: {
       type: String,
       require: true,
     },

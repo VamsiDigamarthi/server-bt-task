@@ -27,6 +27,7 @@ const UserSchema = mongoose.Schema(
     head: {
       type: String,
     },
+    project_id: [],
   },
   { timestamps: true }
 );

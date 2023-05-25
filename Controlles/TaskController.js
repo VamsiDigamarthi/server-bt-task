@@ -17,16 +17,17 @@ export const employeeTaskGet = async (req, res) => {
 };
 
 export const addTask = async (req, res) => {
-  const { task, description, username, head, status, date } = req.body;
+  //const { task, description, username, head, status, date } = req.body;
   // console.log(date);
-  const newTask = new TaskModel({
-    task,
-    description,
-    username,
-    head,
-    status,
-    date,
-  });
+  const newTask = new TaskModel(
+    req.body
+    // task,
+    // description,
+    // username,
+    // head,
+    // status,
+    // date,
+  );
   try {
     const task = await newTask.save();
 

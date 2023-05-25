@@ -1,7 +1,10 @@
 import express from "express";
 import {
   deleteUser,
+  fetchOneEmployee,
+  fetchProjectClickCorrespondingUser,
   loginUser,
+  projectIdAddedToEmployee,
   registerUser,
 } from "../Controlles/AuthController.js";
 //import uploadMiddleware from "../middlewares/multermiddleware.js";
@@ -14,5 +17,13 @@ router.post("/login", loginUser);
 // delete user
 
 router.post("/delete/user", deleteUser);
+
+//project added to employee user
+
+router.post("/project/id", projectIdAddedToEmployee);
+
+router.get("/project/:id", fetchOneEmployee);
+
+router.get("/project/click/user/:id", fetchProjectClickCorrespondingUser);
 
 export default router;

@@ -6,6 +6,8 @@ import multer from "multer";
 import AuthRoute from "./Routes/AuthRoute.js";
 import TaskRoute from "./Routes/TaskRoute.js";
 import TeamRoute from "./Routes/TeamRoute.js";
+
+import TimeRoute from "./Routes/TimeRoute.js";
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -37,3 +39,5 @@ app.use("/tasks", TaskRoute);
 
 //
 app.use("/team", TeamRoute);
+
+app.use("/time", TimeRoute);
