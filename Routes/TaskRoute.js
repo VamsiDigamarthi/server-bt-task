@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  actualCreateDate,
   addTask,
   deleteTask,
   editTask,
@@ -26,5 +27,7 @@ router.delete("/delete/:id", deleteTask);
 //
 // get team leader task based on there username or email
 router.post("/teamleader/task", newAdmingetTeamLeaderTask);
+
+router.post("/actual/date/:id", actualCreateDate);
 
 export default router;

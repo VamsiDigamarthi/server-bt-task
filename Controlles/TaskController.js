@@ -7,7 +7,11 @@ export const employeeTaskGet = async (req, res) => {
   const { name } = req.body;
   try {
     const tasks = await TaskModel.find({ username: name });
-    res.status(200).json(tasks);
+    res.status(200).json(
+      tasks.sort((a, b) => {
+        return b.createdate - a.createdate;
+      })
+    );
     // .sort((a, b) => {
     //   return b.createdAt - a.createdAt;
     // });
@@ -85,5 +89,22 @@ export const newAdmingetTeamLeaderTask = async (req, res) => {
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+// actual create date and actual expert date set api call
+
+export const actualCreateDate = async (req, res) => {
+  const id = req.params.id;
+
+  const { actualCreDate, actualExptDate } = req.body;
+
+  try {
+    const updateT = await TaskModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).json(updateT);
+  } catch (e) {
+    res.status(400).json(e);
   }
 };

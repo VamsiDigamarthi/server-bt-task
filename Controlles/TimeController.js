@@ -1,14 +1,17 @@
 import TimerModel from "../Models/TimerModel.js";
 
 export const addTimeToTask = async (req, res) => {
-  const { projectId, taskValue, timer } = req.body;
+  const { projectId, taskName, taskValue, timer, totalHour } = req.body;
+
+  // console.log(totalHour);
+  // console.log(taskName);
 
   const userExit = await TimerModel.findOne({ taskValue: taskValue });
 
   if (userExit) {
     const exitValue = await TimerModel.findOneAndUpdate(
       { taskValue: taskValue },
-      { $set: { timer: timer } },
+      { $set: { timer: timer, totalHour: totalHour } },
       { new: true }
     );
     res.status(200).json(exitValue);

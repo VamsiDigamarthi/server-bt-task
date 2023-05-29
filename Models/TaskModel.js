@@ -37,6 +37,12 @@ const TaskSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    actualComDate: {
+      type: String,
+    },
+    actualExptDate: {
+      type: String,
+    },
     // created_At: { type: Date, default: new Date().toLocaleDateString() },
     // updated_At: { type: Date, default: new Date().toLocaleDateString() },
   },
