@@ -46,3 +46,14 @@ export const timerGetByIdTaskId = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+export const timerDeleteByIdTaskId = async (req, res) => {
+  const id = req.params.id;
+  try {
+    // await TimerModel.findOneAndDelete({ taskValue: id });
+    await TimerModel.deleteMany({ taskValue: id });
+    res.status(200).json("timer delete successfully.....");
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
