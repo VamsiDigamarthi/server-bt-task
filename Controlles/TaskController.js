@@ -108,3 +108,33 @@ export const actualCreateDate = async (req, res) => {
     res.status(400).json(e);
   }
 };
+
+// admin access all projects
+
+export const adminAccessAllProjects = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const updateT = await TaskModel.find({
+      head: id,
+    });
+    res.status(200).json(updateT);
+  } catch (e) {
+    res.status(400).json(e);
+  }
+};
+
+// admin access a specific projects in admin pages
+
+export const adminAccessSpecificProjects = async (req, res) => {
+  const { project_id } = req.body;
+
+  try {
+    const updateT = await TaskModel.find({
+      project_id: project_id,
+    });
+    res.status(200).json(updateT);
+  } catch (e) {
+    res.status(400).json(e);
+  }
+};

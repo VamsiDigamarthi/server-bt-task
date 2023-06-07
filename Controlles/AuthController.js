@@ -125,3 +125,71 @@ export const fetchProjectClickCorrespondingUser = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+// admin delete team leader
+
+export const adminDeleteTeamLeader = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const userDetails = await UserModel.findByIdAndDelete(id);
+    res.status(200).json("user Delete Successfully");
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
+// profile edit router controller
+
+export const profileEditRouter = async (req, res) => {
+  const id = req.params.id;
+  // console.log(id);
+  // console.log(req.body);
+  try {
+    const userDetails = await UserModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).json(userDetails);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
+// reset passowrd
+
+export const resetPassword = async (req, res) => {
+  const { username, password } = req.body;
+
+  console.log(username);
+  console.log(password);
+
+  try {
+    const exitUser = await UserModel.findOne({ username: username });
+
+    //console.log(exitUser);
+
+    if (exitUser) {
+      const salt = await bcrypt.genSalt(10);
+      const hasspaword = await bcrypt.hash(password, salt);
+
+      const cc = await UserModel.updateOne(
+        { username: username },
+        { $set: { password: hasspaword } }
+      );
+      res.status(401).json(cc);
+      //console.log(exitUser);
+      //console.log(cc);
+      // const comparePass = await bcrypt.compare(password, exitUser.password);
+      // if (comparePass) {
+      //   res.status(200).json(exitUser);
+      // } else {
+      //   res.status(400).json("Wrong password............!");
+      // }
+    } else {
+      res.status(401).json("User does not exit......!");
+      //console.log("user not exits");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+    //console.log("catch");
+  }
+};

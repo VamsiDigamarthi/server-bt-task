@@ -2,6 +2,8 @@ import express from "express";
 import {
   actualCreateDate,
   addTask,
+  adminAccessAllProjects,
+  adminAccessSpecificProjects,
   deleteTask,
   editTask,
   employeeTaskGet,
@@ -29,5 +31,13 @@ router.delete("/delete/:id", deleteTask);
 router.post("/teamleader/task", newAdmingetTeamLeaderTask);
 
 router.post("/actual/date/:id", actualCreateDate);
+
+// admin access all projects
+
+router.get("/admin/allprojects/:id", adminAccessAllProjects);
+
+// admin access the specific projects in admin panel
+
+router.post("/admin/project/idbase", adminAccessSpecificProjects);
 
 export default router;

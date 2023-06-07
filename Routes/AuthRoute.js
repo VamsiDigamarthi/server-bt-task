@@ -1,11 +1,14 @@
 import express from "express";
 import {
+  adminDeleteTeamLeader,
   deleteUser,
   fetchOneEmployee,
   fetchProjectClickCorrespondingUser,
   loginUser,
+  profileEditRouter,
   projectIdAddedToEmployee,
   registerUser,
+  resetPassword,
 } from "../Controlles/AuthController.js";
 //import uploadMiddleware from "../middlewares/multermiddleware.js";
 
@@ -25,5 +28,17 @@ router.post("/project/id", projectIdAddedToEmployee);
 router.get("/project/:id", fetchOneEmployee);
 
 router.get("/project/click/user/:id", fetchProjectClickCorrespondingUser);
+
+// admin team member delete route
+
+router.delete("/admin/team/delete/:id", adminDeleteTeamLeader);
+
+// profile edit router
+
+router.put("/profile/edit/:id", profileEditRouter);
+
+// reset passowrd
+
+router.put("/reset/password", resetPassword);
 
 export default router;

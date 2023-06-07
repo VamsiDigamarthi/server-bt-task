@@ -40,6 +40,9 @@ const TaskSchema = mongoose.Schema(
     actualComDate: {
       type: String,
     },
+    updatedDate: {
+      type: String,
+    },
     actualExptDate: {
       type: String,
     },

@@ -61,8 +61,10 @@ export const addAdminTaskToTeam = async (req, res) => {
 
 export const getOneTeamLeader = async (req, res) => {
   const { role } = req.body;
+  // console.log(role);
   try {
-    const usersList = await UserModel.find({ role: role });
+    // const usersList = await UserModel.find({ role: role });
+    const usersList = await UserModel.find({ username: role });
     res.status(200).json(usersList);
   } catch (e) {
     res.status(400).json(e);
